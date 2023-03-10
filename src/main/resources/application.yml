@@ -1,7 +1,22 @@
+server:
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
 spring:
   # MySQL DB 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/board?serverTimezone=UTC?characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3307/board?serverTimezone=UTC&characterEncoding=UTF-8
     username: jsconf
     password: 1234
+
+# MyBatis 설정
+mybatis:
+  # mapper.xml 파일 위치 설정
+  mapper-locations: classpath:/static/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
