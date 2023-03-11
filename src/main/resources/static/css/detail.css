@@ -1,0 +1,13 @@
+.detail {
+    max-width: 600px;
+    padding: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+.fileLink {
+    text-decoration: none;
+}
+

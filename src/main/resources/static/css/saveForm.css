@@ -1,0 +1,12 @@
+.save-form {
+    max-width: 600px;
+    padding: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+#file {
+    display: none;
+}

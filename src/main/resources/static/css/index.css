@@ -5,3 +5,7 @@
 #searchBtn {
     width: 80px;
 }
+
+.title {
+    text-decoration: none;
+}
