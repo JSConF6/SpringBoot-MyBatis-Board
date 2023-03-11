@@ -9,6 +9,57 @@
     <nav th:replace="layouts/nav"></nav>
     <div class="container">
         <h1>게시판 프로젝트</h1>
+        <table class="table text-center">
+            <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+                <th scope="col">조회수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>게시판 제목 1</td>
+                <td>MARK</td>
+                <td>2023-03-11</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>게시판 제목 2</td>
+                <td>MARK2</td>
+                <td>2023-03-11</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>게시판 제목 3</td>
+                <td>MARK3</td>
+                <td>2023-03-11</td>
+                <td>3</td>
+            </tr>
+            </tbody>
+        </table>
+        <nav class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
     <footer th:replace="layouts/footer"></footer>
 </body>
