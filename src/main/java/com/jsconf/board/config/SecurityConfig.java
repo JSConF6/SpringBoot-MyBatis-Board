@@ -25,6 +25,7 @@ public class SecurityConfig {
         http.csrf().disable(); // CSRF 비활성화
         http.authorizeRequests()
                 .antMatchers("/user/**").authenticated()
+                .antMatchers("/board/save", "/board/update").access("hasRole('ROLE_USER')")
                 .anyRequest().permitAll() // 그외 요청은 권한 없이 접근 가능
                 .and()
                 .formLogin()

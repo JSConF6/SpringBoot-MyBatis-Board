@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
   <div th:fragment="nav">
     <nav class="py-2 bg-light border-bottom mb-4">
@@ -7,10 +7,13 @@
         <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
           <span class="fs-4">RocketBoard</span>
         </a>
-        <ul class="nav">
+        <ul class="nav" sec:authorize-expr="isAuthenticated()">
+          <li class="nav-item"><a href="/user/1/update" class="nav-link link-dark px-2">회원정보수정</a></li>
+          <li class="nav-item"><a href="/logout" class="nav-link link-dark px-2">로그아웃</a></li>
+        </ul>
+        <ul class="nav" sec:authorize-expr="!isAuthenticated()">
           <li class="nav-item"><a href="/signin" class="nav-link link-dark px-2">로그인</a></li>
           <li class="nav-item"><a href="/signup" class="nav-link link-dark px-2">회원가입</a></li>
-          <li class="nav-item"><a href="/user/1/update" class="nav-link link-dark px-2">회원정보수정</a></li>
         </ul>
       </div>
     </nav>

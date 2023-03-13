@@ -20,3 +20,8 @@ mybatis:
   mapper-locations: classpath:/static/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+# log 레벨 설정
+logging:
+  level:
+    '[com.jsconf.board]' : debug
