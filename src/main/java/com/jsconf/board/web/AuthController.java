@@ -38,6 +38,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public String signup(@Valid @ModelAttribute("signup") SignUpDto signUpDto, BindingResult bindingResult) {
+        // 서버에서 유효성검사 실패
         if (bindingResult.hasErrors()){
            return "auth/signup";
         }
