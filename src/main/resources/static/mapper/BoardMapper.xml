@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jsconf.board.mapper.BoardMapper">
+
+    <insert id="save" parameterType="com.jsconf.board.dto.board.BoardSaveDto" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO board(user_id, title, content, create_date)
+        VALUES (#{userId}, #{title}, #{content}, NOW())
+    </insert>
+
+</mapper>

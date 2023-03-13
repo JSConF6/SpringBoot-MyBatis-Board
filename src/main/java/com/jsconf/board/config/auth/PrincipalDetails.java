@@ -1,6 +1,6 @@
 package com.jsconf.board.config.auth;
 
-import com.jsconf.board.domain.user.User;
+import com.jsconf.board.domain.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

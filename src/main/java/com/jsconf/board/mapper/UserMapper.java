@@ -1,5 +1,6 @@
-package com.jsconf.board.domain.user;
+package com.jsconf.board.mapper;
 
+import com.jsconf.board.domain.User;
 import com.jsconf.board.dto.auth.SignUpDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,5 +11,5 @@ public interface UserMapper {
 
     Optional<User> findByUsername(String username);
 
-    int save(SignUpDto signUpDto);
+    void save(SignUpDto signUpDto);
 }

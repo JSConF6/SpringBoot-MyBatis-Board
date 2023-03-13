@@ -1,6 +1,6 @@
 package com.jsconf.board.service;
 
-import com.jsconf.board.domain.user.UserMapper;
+import com.jsconf.board.mapper.UserMapper;
 import com.jsconf.board.dto.auth.SignUpDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,11 +15,11 @@ public class AuthService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
-    public int signup(SignUpDto signUpDto) {
+    public void signup(SignUpDto signUpDto) {
         String rawPassword = signUpDto.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         signUpDto.setPassword(encPassword);
         signUpDto.setRole("ROLE_USER");
-        return userMapper.save(signUpDto);
+        userMapper.save(signUpDto);
     }
 }

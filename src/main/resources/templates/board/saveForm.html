@@ -5,30 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>게시판 - 게시글 작성</title>
   <link th:href="@{/css/saveForm.css}" rel="stylesheet">
-  <script></script>
+  <script type="text/javascript" th:src="@{/js/saveForm.js}"></script>
 </head>
 <body>
 <nav th:replace="layouts/nav"></nav>
 <div class="container">
   <main class="save-form w-100 m-auto">
-    <form>
+    <form th:action th:object="${save}" method="POST" enctype="multipart/form-data" id="saveForm">
       <h1 class="text-center">게시글 작성</h1>
       <div class="mb-3">
         <label for="title" class="form-label">제목</label>
-        <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+        <input type="text" class="form-control" th:field="*{title}" th:errorclass="is-invalid" placeholder="제목을 입력하세요" minlength="5" maxlength="30">
+        <div class="invalid-feedback" th:errors="*{title}">
+          제목을 입력해주세요
+        </div>
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">내용</label>
-        <textarea class="form-control" id="content" rows="5"></textarea>
+        <textarea class="form-control" th:field="*{content}" th:errorclass="is-invalid" rows="5"></textarea>
+        <div class="invalid-feedback" th:errors="*{content}">
+          내용을 입력해주세요
+        </div>
       </div>
       <div class="mb-3">
-        <button class="btn btn-primary me-2" type="button" id="fileUploadBtn">업로드</button>
-        <span id="fileName">adas</span>
-        <input type="file" class="form-control" id="file">
+        <button class="btn btn-primary me-1" type="button" id="fileUploadBtn">업로드</button>
+        <span id="fileName"></span>
+        <i class="fa-solid fa-x hide" id="fileRemoveBtn"></i>
+        <input type="file" class="form-control" id="file" name="file">
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary me-md-2" type="button">저장</button>
-        <a href="javascript:history.back()" class="btn btn-secondary">목록</a>
+        <button class="btn btn-primary me-md-2" type="submit">저장</button>
+        <a href="/" class="btn btn-secondary">목록</a>
       </div>
     </form>
   </main>

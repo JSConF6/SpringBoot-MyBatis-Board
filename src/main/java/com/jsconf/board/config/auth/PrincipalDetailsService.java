@@ -1,10 +1,8 @@
 package com.jsconf.board.config.auth;
 
-import com.jsconf.board.domain.user.User;
-import com.jsconf.board.domain.user.UserMapper;
+import com.jsconf.board.domain.User;
+import com.jsconf.board.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

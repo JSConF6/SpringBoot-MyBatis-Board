@@ -1,4 +1,4 @@
-package com.jsconf.board.domain.user;
+package com.jsconf.board.domain;
 
 import lombok.Data;
 
