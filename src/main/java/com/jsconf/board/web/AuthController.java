@@ -6,9 +6,13 @@ import com.jsconf.board.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @Controller
@@ -33,7 +37,11 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String signup(SignUpDto signUpDto) {
+    public String signup(@Valid @ModelAttribute("signup") SignUpDto signUpDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+           return "auth/signup";
+        }
+
         authService.signup(signUpDto);
         return "redirect:/signin";
     }
