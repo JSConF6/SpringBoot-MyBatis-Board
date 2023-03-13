@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/header :: header(~{::title}, ~{::link})">
+<head th:replace="layouts/header :: header(~{::title}, ~{::link}, ~{::script})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>게시판 - 게시글 상세보기</title>
   <link th:href="@{/css/detail.css}" rel="stylesheet">
+  <script></script>
 </head>
 <body>
 <nav th:replace="layouts/nav"></nav>
