@@ -1,6 +1,7 @@
 package com.jsconf.board.web;
 
 import com.jsconf.board.config.auth.PrincipalDetails;
+import com.jsconf.board.dto.board.BoardDto;
 import com.jsconf.board.dto.board.BoardSaveDto;
 import com.jsconf.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -37,7 +35,7 @@ public class BoardController {
         }
         boardSaveDto.setUserId(principalDetails.getUser().getId());
         boardService.save(boardSaveDto);
-        return "redirect:/board/detail";
+        return "redirect:/board/" + boardSaveDto.getId() + "/detail";
     }
 
     @GetMapping("/update")
@@ -45,8 +43,10 @@ public class BoardController {
         return "board/updateForm";
     }
 
-    @GetMapping("/detail")
-    public String detail() {
+    @GetMapping("/{boardId}/detail")
+    public String detail(@PathVariable int boardId, Model model) {
+        BoardDto boardDto = boardService.getBoard(boardId);
+        model.addAttribute("boardDto", boardDto);
         return "board/detail";
     }
 }

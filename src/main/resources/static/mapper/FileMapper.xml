@@ -5,8 +5,8 @@
 <mapper namespace="com.jsconf.board.mapper.FileMapper">
 
     <insert id="save" parameterType="com.jsconf.board.dto.file.FileDto">
-        INSERT INTO file(board_id, file_path, create_date)
-        VALUES (#{boardId}, #{filePath}, NOW())
+        INSERT INTO file(board_id, file_name, file_original_name, file_path, create_date)
+        VALUES (#{boardId}, #{fileName}, #{fileOriginalName}, #{filePath}, NOW())
     </insert>
 
 </mapper>

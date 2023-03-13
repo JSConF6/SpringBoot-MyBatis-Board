@@ -1,9 +1,9 @@
-package com.jsconf.board.domain;
+package com.jsconf.board.dto.board;
 
 import lombok.Data;
 
 @Data
-public class Board {
+public class BoardDto {
     private int id;
     private int userId;
     private String title;
@@ -12,4 +12,5 @@ public class Board {
     private String createDate;
     private int fileId;
     private String fileOriginalName;
+    private boolean boardOwnerState;
 }

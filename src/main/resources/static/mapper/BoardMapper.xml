@@ -9,4 +9,11 @@
         VALUES (#{userId}, #{title}, #{content}, NOW())
     </insert>
 
+    <select id="findById" parameterType="int" resultType="com.jsconf.board.dto.board.BoardDto">
+        SELECT b.id, b.user_id, b.title, b.content, b.read_count, b.create_date, f.id AS file_id, f.file_original_name
+        FROM board b
+        LEFT JOIN file f ON b.id = f.board_id
+        WHERE b.id = #{boardId}
+    </select>
+
 </mapper>

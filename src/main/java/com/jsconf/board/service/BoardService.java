@@ -1,5 +1,7 @@
 package com.jsconf.board.service;
 
+import com.jsconf.board.domain.Board;
+import com.jsconf.board.dto.board.BoardDto;
 import com.jsconf.board.dto.board.BoardSaveDto;
 import com.jsconf.board.dto.file.FileDto;
 import com.jsconf.board.handler.ex.CustomException;
@@ -25,22 +27,28 @@ public class BoardService {
     @Value("${file.path}")
     private String uploadFolder;
 
+    public BoardDto getBoard(int boardId) {
+        BoardDto boardDto = boardMapper.findById(boardId);
+        return boardDto;
+    }
+
     @Transactional
     public void save(BoardSaveDto boardSaveDto) {
         boardMapper.save(boardSaveDto);
 
         if(!boardSaveDto.getFile().isEmpty()) {
             UUID uuid = UUID.randomUUID();
+            String fileOriginalName = boardSaveDto.getFile().getOriginalFilename();
             String fileName = uuid + "_" + boardSaveDto.getFile().getOriginalFilename();
 
             Path filePath = Paths.get(uploadFolder + fileName);
-            System.out.println(filePath);
-            System.out.println(filePath.toString());
 
             try{
                 Files.write(filePath, boardSaveDto.getFile().getBytes());
                 FileDto fileDto = FileDto.builder()
                         .boardId(boardSaveDto.getId())
+                        .fileName(fileName)
+                        .fileOriginalName(fileOriginalName)
                         .filePath(filePath.toString())
                         .build();
                 fileMapper.save(fileDto);
