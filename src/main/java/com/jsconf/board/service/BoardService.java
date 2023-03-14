@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,7 +31,36 @@ public class BoardService {
     private String uploadFolder;
 
     public void boardUpdate(BoardUpdateDto boardUpdateDto) {
-        boardMapper.updateBoard(boardUpdateDto);
+        try{
+            boardMapper.updateBoard(boardUpdateDto);
+
+            if (!boardUpdateDto.getFile().isEmpty()) {
+                FileDto fileDto = getFileDto(boardUpdateDto.getFile(), boardUpdateDto.getId());
+                if (boardUpdateDto.getFileId() != 0) {
+                    fileMapper.updateFile(fileDto);
+                } else {
+                    fileMapper.save(fileDto);
+                }
+            }
+        } catch(Exception e) {
+            throw new CustomException("게시글 수정 중 오류가 발생했습니다.");
+        }
+    }
+
+    private FileDto getFileDto(MultipartFile file, int id) throws IOException {
+        UUID uuid = UUID.randomUUID();
+        String fileOriginalName = file.getOriginalFilename();
+        String fileName = uuid + "_" + file.getOriginalFilename();
+
+        Path filePath = Paths.get(uploadFolder + fileName);
+
+        Files.write(filePath, file.getBytes());
+        return FileDto.builder()
+                .boardId(id)
+                .fileName(fileName)
+                .fileOriginalName(fileOriginalName)
+                .filePath(filePath.toString())
+                .build();
     }
 
     public void boardDelete(int boardId) {
@@ -43,27 +74,15 @@ public class BoardService {
 
     @Transactional
     public void save(BoardSaveDto boardSaveDto) {
-        boardMapper.save(boardSaveDto);
+        try{
+            boardMapper.save(boardSaveDto);
 
-        if(!boardSaveDto.getFile().isEmpty()) {
-            UUID uuid = UUID.randomUUID();
-            String fileOriginalName = boardSaveDto.getFile().getOriginalFilename();
-            String fileName = uuid + "_" + boardSaveDto.getFile().getOriginalFilename();
-
-            Path filePath = Paths.get(uploadFolder + fileName);
-
-            try{
-                Files.write(filePath, boardSaveDto.getFile().getBytes());
-                FileDto fileDto = FileDto.builder()
-                        .boardId(boardSaveDto.getId())
-                        .fileName(fileName)
-                        .fileOriginalName(fileOriginalName)
-                        .filePath(filePath.toString())
-                        .build();
+            if(!boardSaveDto.getFile().isEmpty()) {
+                FileDto fileDto = getFileDto(boardSaveDto.getFile(), boardSaveDto.getId());
                 fileMapper.save(fileDto);
-            } catch(Exception e) {
-                throw new CustomException("파일 업로드 중 오류가 발생했습니다.");
             }
+        } catch(Exception e) {
+            throw new CustomException("게시글 저장 중 오류가 발생했습니다.");
         }
     }
 }

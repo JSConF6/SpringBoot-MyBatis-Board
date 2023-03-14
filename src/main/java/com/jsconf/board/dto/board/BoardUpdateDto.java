@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 public class BoardUpdateDto {
     private int id;
 
+    private String name;
+
     @Size(min =  5, max = 30, message = "제목은 5에서 30 사이여야 합니다")
     @NotBlank(message = "제목을 입력해주세요")
     private String title;
@@ -17,5 +19,11 @@ public class BoardUpdateDto {
     @NotBlank(message = "내용을 입력해주세요")
     private String content;
 
+    private int fileId;
+
+    private String fileOriginalName;
+
     private MultipartFile file;
+
+    private String createDate;
 }

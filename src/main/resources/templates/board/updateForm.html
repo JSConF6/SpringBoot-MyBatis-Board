@@ -20,11 +20,17 @@
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">제목</label>
-        <input type="text" class="form-control" th:field="*{title}" placeholder="제목을 입력하세요">
+        <input type="text" class="form-control" th:field="*{title}" th:errorclass="is-invalid" placeholder="제목을 입력하세요">
+        <div class="invalid-feedback" th:errors="*{title}">
+          제목을 입력해주세요
+        </div>
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">내용</label>
-        <textarea class="form-control" id="content" rows="5" th:field="*{content}">내용입니다.</textarea>
+        <textarea class="form-control" id="content" rows="5" th:errorclass="is-invalid" th:field="*{content}">내용입니다.</textarea>
+        <div class="invalid-feedback" th:errors="*{content}">
+          내용을 입력해주세요
+        </div>
       </div>
       <div class="mb-3">
         <label for="createDate" class="form-label">작성일</label>
@@ -34,7 +40,9 @@
         <button class="btn btn-primary me-2" type="button" id="fileUploadBtn">업로드</button>
         <span id="fileName" th:text="*{fileOriginalName}"></span>
         <i class="fa-solid fa-x" id="fileRemoveBtn" th:classappend="*{fileOriginalName == null} ? 'hide' : 'show'"></i>
-        <input type="file" class="form-control" id="file">
+        <input type="file" class="form-control" id="file" name="file">
+        <input type="hidden" th:field="*{fileId}" />
+        <input type="hidden" th:field="*{fileOriginalName}" />
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button class="btn btn-primary me-md-2" type="submit">수정</button>

@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface FileMapper {
     void save(FileDto fileDto);
+
+    void updateFile(FileDto fileDto);
 }

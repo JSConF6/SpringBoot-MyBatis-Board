@@ -9,4 +9,12 @@
         VALUES (#{boardId}, #{fileName}, #{fileOriginalName}, #{filePath}, NOW())
     </insert>
 
+    <update id="updateFile" parameterType="com.jsconf.board.dto.file.FileDto">
+        UPDATE file
+        SET file_path = #{filePath},
+            file_original_name = #{fileOriginalName},
+            file_name = #{fileName}
+        WHERE board_id = #{boardId}
+    </update>
+
 </mapper>

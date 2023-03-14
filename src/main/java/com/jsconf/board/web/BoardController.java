@@ -49,6 +49,7 @@ public class BoardController {
     @PostMapping("/update")
     public String save(@Valid @ModelAttribute("boardDto") BoardUpdateDto boardUpdateDto,
                        BindingResult bindingResult) {
+        System.out.println(boardUpdateDto);
         if (bindingResult.hasErrors()) {
             return "board/updateForm";
         }

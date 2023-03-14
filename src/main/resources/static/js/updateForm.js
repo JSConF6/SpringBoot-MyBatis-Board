@@ -19,6 +19,9 @@ $(function() {
             e.preventDefault();
             return;
         }
+
+        $("#name").attr("disabled", false);
+        $("#createDate").attr("disabled", false);
     });
 
     // 제목 입력시 validation class 제거
