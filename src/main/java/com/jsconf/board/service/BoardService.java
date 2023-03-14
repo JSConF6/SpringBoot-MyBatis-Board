@@ -3,6 +3,7 @@ package com.jsconf.board.service;
 import com.jsconf.board.domain.Board;
 import com.jsconf.board.dto.board.BoardDto;
 import com.jsconf.board.dto.board.BoardSaveDto;
+import com.jsconf.board.dto.board.BoardUpdateDto;
 import com.jsconf.board.dto.file.FileDto;
 import com.jsconf.board.handler.ex.CustomException;
 import com.jsconf.board.mapper.BoardMapper;
@@ -26,6 +27,14 @@ public class BoardService {
 
     @Value("${file.path}")
     private String uploadFolder;
+
+    public void boardUpdate(BoardUpdateDto boardUpdateDto) {
+        boardMapper.updateBoard(boardUpdateDto);
+    }
+
+    public void boardDelete(int boardId) {
+        boardMapper.deleteById(boardId);
+    }
 
     public BoardDto getBoard(int boardId) {
         BoardDto boardDto = boardMapper.findById(boardId);

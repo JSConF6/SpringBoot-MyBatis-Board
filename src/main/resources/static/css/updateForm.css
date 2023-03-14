@@ -10,3 +10,17 @@ textarea {
 #file {
     display: none;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: inline-block;
+}
+
+#fileRemoveBtn {
+    cursor : pointer;
+    color: red;
+    margin-left: 3px;
+}

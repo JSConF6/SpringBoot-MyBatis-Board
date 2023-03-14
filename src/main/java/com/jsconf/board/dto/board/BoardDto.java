@@ -6,6 +6,7 @@ import lombok.Data;
 public class BoardDto {
     private int id;
     private int userId;
+    private String name;
     private String title;
     private String content;
     private int readCount;

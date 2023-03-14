@@ -10,10 +10,22 @@
     </insert>
 
     <select id="findById" parameterType="int" resultType="com.jsconf.board.dto.board.BoardDto">
-        SELECT b.id, b.user_id, b.title, b.content, b.read_count, b.create_date, f.id AS file_id, f.file_original_name
+        SELECT b.id, b.user_id, u.name, b.title, b.content, b.read_count, b.create_date, f.id AS file_id, f.file_original_name
         FROM board b
+        INNER JOIN user u ON b.user_id = u.id
         LEFT JOIN file f ON b.id = f.board_id
         WHERE b.id = #{boardId}
     </select>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM board WHERE id = #{boardId}
+    </delete>
+
+    <update id="updateBoard" parameterType="com.jsconf.board.dto.board.BoardUpdateDto">
+        UPDATE board
+        SET title = #{title},
+            content = #{content}
+        WHERE id = #{id}
+    </update>
 
 </mapper>
