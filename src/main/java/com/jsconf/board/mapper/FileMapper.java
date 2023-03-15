@@ -8,4 +8,6 @@ public interface FileMapper {
     void save(FileDto fileDto);
 
     void updateFile(FileDto fileDto);
+
+    FileDto findById(int fileId);
 }

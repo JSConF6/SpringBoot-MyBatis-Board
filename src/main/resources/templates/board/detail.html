@@ -30,7 +30,9 @@
     </div>
     <div class="mb-3">
       <button class="btn btn-primary me-2" type="button" id="fileUploadBtn">첨부파일</button>
-      <a href="#" class="link-secondary fileLink"><span id="fileName" th:text="${boardDto.fileOriginalName}">첨부파일 이름</span></a>
+      <a th:href="@{/board/{fileId}/download(fileId=${boardDto.fileId})}" class="link-secondary fileLink">
+        <span id="fileName" th:text="${boardDto.fileOriginalName}">첨부파일 이름</span>
+      </a>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <div sec:authorize-expr="isAuthenticated()" th:if="${#authentication.principal.user.id == boardDto.userId}">

@@ -17,4 +17,10 @@
         WHERE board_id = #{boardId}
     </update>
 
+    <select id="findById" parameterType="int" resultType="com.jsconf.board.dto.file.FileDto">
+        SELECT *
+        FROM file
+        WHERE id = #{fileId}
+    </select>
+
 </mapper>
