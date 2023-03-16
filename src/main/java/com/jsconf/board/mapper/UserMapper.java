@@ -11,5 +11,9 @@ public interface UserMapper {
 
     Optional<User> findByUsername(String username);
 
+    Optional<User> findById(int userId);
+
     void save(SignUpDto signUpDto);
+
+    void updateById(User user);
 }
